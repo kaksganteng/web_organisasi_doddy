@@ -3,17 +3,18 @@
  * Class Database Handler (PDO)
  */
 class Database {
-    private string $host = "localhost";
-    private string $db_name = "db_organisasi";
+    private string $host = "mysql.railway.internal";
+    private string $db_name = "railway";
     private string $username = "root";
-    private string $password = "";
+    private string $password = "yhcuQsJefetchMuXnlyYCGYtrQsqbKiv";
+    private string $port = "3306";
     private ?PDO $conn = null;
 
     public function getConnection(): PDO {
         if ($this->conn === null) {
             try {
                 $this->conn = new PDO(
-                    "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4",
+                    "mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name . ";charset=utf8mb4",
                     $this->username,
                     $this->password,
                     [

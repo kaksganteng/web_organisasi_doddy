@@ -3,11 +3,11 @@
  * Class Database Handler (PDO)
  */
 class Database {
-    private string $host = "autorack.proxy.rlwy.net"; // Ganti dengan Host dari menu Connect Railway
+    private string $host = "mysql.railway.internal";
     private string $db_name = "railway";
     private string $username = "root";
     private string $password = "yhcuQsJefetchMuXnlyYCGYtrQsqbKiv";
-    private string $port = "14232"; // Ganti dengan Port dari menu Connect Railway
+    private string $port = "3306";
     private ?PDO $conn = null;
 
     public function getConnection(): PDO {

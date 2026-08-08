@@ -1,20 +1,30 @@
 <?php
 /**
- * Class Database Handler (PDO)
+ * Class Database Handler (PDO - PostgreSQL Supabase)
  */
 class Database {
-    private string $host = "mysql.railway.internal";
-    private string $db_name = "railway";
-    private string $username = "root";
-    private string $password = "yhcuQsJefetchMuXnlyYCGYtrQsqbKiv";
-    private string $port = "3306";
+    private string $host;
+    private string $db_name;
+    private string $username;
+    private string $password;
+    private string $port;
     private ?PDO $conn = null;
+
+    public function __construct() {
+        // Otomatis membaca variabel lingkungan dari integrasi Vercel & Supabase
+        $this->host = getenv('POSTGRES_HOST') ?: 'localhost';
+        $this->db_name = getenv('POSTGRES_DATABASE') ?: 'postgres';
+        $this->username = getenv('POSTGRES_USER') ?: 'postgres';
+        $this->password = getenv('POSTGRES_PASSWORD') ?: '';
+        $this->port = getenv('POSTGRES_PORT') ?: '5432';
+    }
 
     public function getConnection(): PDO {
         if ($this->conn === null) {
             try {
+                // Perhatikan perubahan dari "mysql:" menjadi "pgsql:"
                 $this->conn = new PDO(
-                    "mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name . ";charset=utf8mb4",
+                    "pgsql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name,
                     $this->username,
                     $this->password,
                     [
